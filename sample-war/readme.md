@@ -1,3 +1,5 @@
 # sample-war
 
-Download [tomcat](https://tomcat.apache.org/download-11.cgi) to start the app locally.
+## Local setup
+- download [tomcat](https://tomcat.apache.org/download-11.cgi)
+- run [sample-war](.run/sample-war.run.xml) run configuration

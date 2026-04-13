@@ -7,6 +7,7 @@ alias merge='git merge'
 alias prune='git remote prune origin'
 alias amend='git commit --amend -aC HEAD'
 alias ampw='amend & pushwip'
+alias s=ampw #means "sync"
 alias br='git branch -r --column --sort -committerdate'
 commit() {
   message=$1
