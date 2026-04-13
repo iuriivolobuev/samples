@@ -64,11 +64,6 @@
     </dependency>
 
     <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-    </dependency>
-
-    <dependency>
       <groupId>io.qala.datagen</groupId>
       <artifactId>qala-datagen</artifactId>
     </dependency>
