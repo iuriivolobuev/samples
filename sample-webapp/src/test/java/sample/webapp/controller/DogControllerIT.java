@@ -75,47 +75,47 @@ public class DogControllerIT {
     }
 
     private static DogDto getDog(String id) {
-        Response response = given().get("/dog/{id}", id);
+        Response response = given().get("/api/dog/{id}", id);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         return response.as(DogDto.class);
     }
 
     private static void getDogWithError(String id, HttpStatus status, String error) {
-        Response response = given().get("/dog/{id}", id);
+        Response response = given().get("/api/dog/{id}", id);
         assertEquals(status.value(), response.getStatusCode());
         assertThat(response.as(String.class), containsString(error));
     }
 
     private static List<DogDto> getAllDogs() {
-        Response response = given().get("/dog");
+        Response response = given().get("/api/dog");
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         return List.of(response.as(DogDto[].class));
     }
 
     private static DogDto createDog(DogDto dog) {
-        Response response = given().contentType(ContentType.JSON).body(dog).when().post("/dog");
+        Response response = given().contentType(ContentType.JSON).body(dog).when().post("/api/dog");
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         return response.as(DogDto.class);
     }
 
     private static void createDogWithError(DogDto dog, HttpStatus status, String error) {
-        Response response = given().contentType(ContentType.JSON).body(dog).when().post("/dog");
+        Response response = given().contentType(ContentType.JSON).body(dog).when().post("/api/dog");
         assertEquals(status.value(), response.getStatusCode());
         assertThat(response.as(String.class), containsString(error));
     }
 
     private static void updateDog(String id, DogDto dog) {
-        given().contentType(ContentType.JSON).body(dog).when().put("/dog/{id}", id);
+        given().contentType(ContentType.JSON).body(dog).when().put("/api/dog/{id}", id);
     }
 
     private static void updateDogWithError(String id, DogDto dog, HttpStatus status, String error) {
-        Response response = given().contentType(ContentType.JSON).body(dog).when().put("/dog/{id}", id);
+        Response response = given().contentType(ContentType.JSON).body(dog).when().put("/api/dog/{id}", id);
         assertEquals(status.value(), response.getStatusCode());
         assertThat(response.as(String.class), containsString(error));
     }
 
     private static void deleteDog(String id) {
-        given().when().delete("/dog/{id}", id);
+        given().when().delete("/api/dog/{id}", id);
     }
 
     private static void assertDogsEqual(DogDto actual, DogDto expected) {

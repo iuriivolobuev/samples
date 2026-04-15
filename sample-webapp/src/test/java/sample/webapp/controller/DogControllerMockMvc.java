@@ -22,46 +22,46 @@ class DogControllerMockMvc {
     }
 
     DogDto getDog(String id) {
-        MockMvcResponse response = given().get("/dog/{id}", id);
+        MockMvcResponse response = given().get("/api/dog/{id}", id);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         return response.as(DogDto.class);
     }
 
     void getDogWithError(String id, HttpStatus status, String error) {
-        MockMvcResponse response = given().get("/dog/{id}", id);
+        MockMvcResponse response = given().get("/api/dog/{id}", id);
         assertEquals(status.value(), response.getStatusCode());
         assertThat(response.as(String.class), containsString(error));
     }
 
     List<DogDto> getAllDogs() {
-        MockMvcResponse response = given().get("/dog");
+        MockMvcResponse response = given().get("/api/dog");
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         return List.of(response.as(DogDto[].class));
     }
 
     DogDto createDog(DogDto dog) {
-        MockMvcResponse response = given().body(dog).post("/dog");
+        MockMvcResponse response = given().body(dog).post("/api/dog");
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         return response.as(DogDto.class);
     }
 
     void createDogWithError(DogDto dog, HttpStatus status, String error) {
-        MockMvcResponse response = given().contentType(ContentType.JSON).body(dog).when().post("/dog");
+        MockMvcResponse response = given().contentType(ContentType.JSON).body(dog).when().post("/api/dog");
         assertEquals(status.value(), response.getStatusCode());
         assertThat(response.as(String.class), containsString(error));
     }
 
     void updateDog(String id, DogDto dog) {
-        given().contentType(ContentType.JSON).body(dog).when().put("/dog/{id}", id);
+        given().contentType(ContentType.JSON).body(dog).when().put("/api/dog/{id}", id);
     }
 
     void updateDogWithError(String id, DogDto dog, HttpStatus status, String error) {
-        MockMvcResponse response = given().contentType(ContentType.JSON).body(dog).when().put("/dog/{id}", id);
+        MockMvcResponse response = given().contentType(ContentType.JSON).body(dog).when().put("/api/dog/{id}", id);
         assertEquals(status.value(), response.getStatusCode());
         assertThat(response.as(String.class), containsString(error));
     }
 
     void deleteDog(String id) {
-        given().when().delete("/dog/{id}", id);
+        given().when().delete("/api/dog/{id}", id);
     }
 }

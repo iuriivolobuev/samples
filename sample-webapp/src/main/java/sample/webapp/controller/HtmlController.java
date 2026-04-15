@@ -16,14 +16,4 @@ public class HtmlController {
     public String dogsPage() {
         return "/static/html/dogs.html";
     }
-
-    @GetMapping("/decks")
-    public String decksPage() {
-        return "/static/html/decks.html";
-    }
-
-    @GetMapping("/deck/{id}")
-    public String deckPage() {
-        return "/static/html/deck.html";
-    }
 }

@@ -1,7 +1,6 @@
 *.iml
 .idea/
 target/
-
-sample-webapp/scripts/sample-app/proxy-server/node_modules/
-sample-webapp/scripts/sample-app/proxy-server/package.json
-sample-webapp/scripts/sample-app/proxy-server/package-lock.json
+node_modules/
+package.json
+package-lock.json

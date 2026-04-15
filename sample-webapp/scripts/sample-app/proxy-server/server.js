@@ -5,7 +5,7 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
-app.use('/proxy', createProxyMiddleware({
+app.use('/', createProxyMiddleware({
   target: 'http://localhost:8080/',
   changeOrigin: true
 }));
