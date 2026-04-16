@@ -1,3 +1,7 @@
+//1. npm init -y
+//2. npm install express http-proxy-middleware cors
+//3. node proxy.js
+
 const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const cors = require('cors');
