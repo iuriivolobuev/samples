@@ -16,7 +16,6 @@
   <mvc:resources mapping="/static/**" location="classpath:/static/"/>
 
   <bean class="sample.webapp.controller.AppController"/>
-  <bean class="sample.webapp.controller.DeckController"/>
   <bean class="sample.webapp.controller.DogController"/>
   <bean class="sample.webapp.controller.HtmlController"/>
 
