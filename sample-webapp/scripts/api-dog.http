@@ -1,0 +1,39 @@
+### Get all dogs
+# curl -i -H "Accept: application/json" -X GET http://localhost:8080/api/dog
+GET http://localhost:8080/api/dog
+Accept: application/json
+
+### Get a dog
+# curl -i -H "Accept: application/json" -X GET http://localhost:8080/api/dog/75a9c8f1-22b7-4460-b6a7-35befa41d929
+GET http://localhost:8080/api/dog/75a9c8f1-22b7-4460-b6a7-35befa41d929
+Accept: application/json
+
+### Create a dog
+# curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST http://localhost:8080/api/dog -d '{"name": "Buddy", "timeOfBirth": "2024-09-01T09:30:45.123Z", "height": 0.52, "weight": 13.5}'
+POST http://localhost:8080/api/dog
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Buddy",
+  "timeOfBirth": "2024-09-01T09:30:45.123Z",
+  "height": 0.52,
+  "weight": 13.5
+}
+
+### Update a dog
+# curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X PUT http://localhost:8080/api/dog/75a9c8f1-22b7-4460-b6a7-35befa41d929 -d '{"name": "Buddy2", "timeOfBirth": "2024-09-01T09:30:45.123Z", "height": 0.52, "weight": 13.5}'
+PUT http://localhost:8080/api/dog/75a9c8f1-22b7-4460-b6a7-35befa41d929
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Buddy2",
+  "timeOfBirth": "2024-09-01T09:30:45.123Z",
+  "height": 0.52,
+  "weight": 13.5
+}
+
+### Delete a dog
+# curl -i -X DELETE http://localhost:8080/api/dog/75a9c8f1-22b7-4460-b6a7-35befa41d929
+DELETE http://localhost:8080/api/dog/75a9c8f1-22b7-4460-b6a7-35befa41d929

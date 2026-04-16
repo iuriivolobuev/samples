@@ -1,3 +1,5 @@
 # sample-webapp
 
-Run `EmbeddedTomcatStarter#main` to start the app locally.
+## Setup
+- run [postgres-up.sh](scripts/postgres-up.sh) to start postgres
+- run `EmbeddedTomcatStarter#main`

@@ -10,15 +10,21 @@ import java.util.concurrent.Executors;
 
 /**
  * Tomcat:
- * - maxConnections = number of connections that are being processed by servlets + those that were just accepted
- * - maxConnections + acceptCount (backlog), additional connections will be refused
+ * <ul>
+ *     <li>maxConnections = number of connections that are being processed by servlets + those that were just accepted</li>
+ *     <li>maxConnections + acceptCount (backlog), additional connections will be refused</li>
+ * </ul>
  *
  * <p>Timeouts:
- * - connection timeout (before accept if wasn't accepted during some time)
- * - socket timeout (after accept if was idle during some time)
+ * <ul>
+ *     <li>connection timeout (before accept if wasn't accepted during some time)</li>
+ *     <li>socket timeout (after accept if was idle during some time)</li>
+ * </ul>
  *
  * <p>Example:
- * - in server.xml: maxThreads = 5, maxConnections = 6, acceptCount = 10
+ * <ul>
+ *     <li>in server.xml: maxThreads = 5, maxConnections = 6, acceptCount = 10</li>
+ * </ul>
  */
 class TomcatClient {
     private static final Logger LOGGER = LoggerFactory.getLogger(TomcatClient.class);
