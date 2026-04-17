@@ -1,37 +1,23 @@
-package sample.webapp.sample.util;
+package sample.basic.util;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
-/**
- * To train learned words and phrases from another language.
- *
- * <p>Usage:
- * <ol>
- *     <li>cd src/main/java</li>
- *     <li>javac util/VocabularyTrainer.java</li>
- *     <li>java -cp . util.VocabularyTrainer words.csv</li>
- * </ol>
- * words.csv might be something like this:
- * <pre>
- * Es ist ein Hund.|It is a dog.
- * Er heißt Buddy.|His name is Buddy.
- * </pre>
- * Use "rlwrap" utility for better interaction during training (i.e. the left & right arrows to move the cursor, and the
- * up arrow to get previous input): {@code rlwrap java -cp . util.VocabularyTrainer words.csv}.
- */
-class VocabularyTrainer {
+/**Helps learn foreign words/phrases.*/
+class VocabTrainer {
     private static final String CSV_DELIMITER = "\\|";
     private static final String GET_ANSWER_COMMAND = "?";
 
+    /**{@code args[0]} can be either a file path or a classpath resource, can try out with "vocabtrainer/vocab.csv" resource.*/
     public static void main(String[] args) {
         if (args.length == 0) {
             printText("Path should be specified as an argument.");
@@ -67,13 +53,30 @@ class VocabularyTrainer {
 
     private static List<Translation> readTranslationsFromCsv(String path) throws IOException {
         List<Translation> translations = new ArrayList<>();
-        try (Stream<String> lines = Files.lines(Paths.get(path))) {
-            for (String line : lines.toList()) {
-                String[] parts = line.split(CSV_DELIMITER);
-                translations.add(new Translation(parts[1], parts[0]));
-            }
+        for (String line : getLines(path)) {
+            String[] parts = line.split(CSV_DELIMITER);
+            translations.add(new Translation(parts[1], parts[0]));
         }
         return translations;
+    }
+
+    private static List<String> getLines(String path) {
+        try {
+            Path p = Paths.get(path);
+            if (Files.exists(p))
+                return Files.readAllLines(p);
+
+            try (InputStream s = VocabTrainer.class.getClassLoader().getResourceAsStream(path)) {
+                if (s != null) {
+                    try (BufferedReader r = new BufferedReader(new InputStreamReader(s))) {
+                        return r.lines().toList();
+                    }
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Couldn't load [\"%s\"].".formatted(path));
+        }
+        throw new RuntimeException("Couldn't find [\"%s\"].".formatted(path));
     }
 
     private static boolean process(Scanner scanner, String answer) {
@@ -119,42 +122,5 @@ class VocabularyTrainer {
                 " ".repeat(size - completed), completed * 100 / size);
     }
 
-    private static class Translation {
-        private final String from;
-        private final String to;
-
-        public Translation(String from, String to) {
-            this.from = from;
-            this.to = to;
-        }
-    }
-
-    @SuppressWarnings("unused")//txt format is needed for learning before training
-    private static class CsvToTxtConverter {
-        public static void main(String[] args) throws IOException {
-            if (args.length == 0) {
-                printText("Path should be specified as an argument.");
-                return;
-            }
-
-            List<Translation> translations;
-            String csvPath = args[0];
-            try {
-                translations = readTranslationsFromCsv(csvPath);
-            } catch (IOException e) {
-                printText("Couldn't get translations from '%s'.".formatted(csvPath));
-                return;
-            }
-
-            if (!translations.isEmpty()) {
-                try (PrintWriter writer = new PrintWriter("translations.txt", StandardCharsets.UTF_8)) {
-                    for (Translation translation : translations) {
-                        writer.println(translation.to);
-                        writer.println(translation.from);
-                        writer.println();
-                    }
-                }
-            }
-        }
-    }
+    private record Translation(String from, String to) {}
 }

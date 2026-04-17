@@ -1,7 +1,7 @@
-package sample.webapp.sample.chem;
+package sample.basic.util;
 
 @SuppressWarnings("unused"/*helps with testing the chemistry plugin*/)
-public class Molecules {
+public class Chemistry {
     /*SMILES*/
     private static final String MOL_11 = "O";//water
     private static final String MOL_12 = "O=O";//dioxygen
