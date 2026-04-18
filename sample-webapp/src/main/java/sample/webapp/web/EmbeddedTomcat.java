@@ -37,6 +37,7 @@ class EmbeddedTomcat {
         this.tomcat.setBaseDir(System.getProperty("java.io.tmpdir"));
         this.context = this.tomcat.addContext("", null);
         this.context.setSessionTimeout(30);
+        this.context.addServletContainerInitializer(new org.apache.tomcat.websocket.server.WsSci(), null);
         this.tomcat.setConnector(createConnector());
         addSpringContext(springConfigLocation);
 

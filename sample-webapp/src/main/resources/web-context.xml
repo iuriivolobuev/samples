@@ -3,8 +3,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:websocket="http://www.springframework.org/schema/websocket"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-          http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd"
+          http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+          http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd"
        default-autowire="constructor">
 
   <mvc:annotation-driven>
@@ -24,4 +26,9 @@
       <bean class="sample.webapp.service.DbDogService"/>
     </constructor-arg>
   </bean>
+
+  <websocket:handlers>
+    <websocket:mapping path="/ws" handler="dogWebSocketHandler"/>
+  </websocket:handlers>
+  <bean id="dogWebSocketHandler" class="sample.webapp.controller.DogWebSocketHandler"/>
 </beans>

@@ -1,20 +1,37 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-<title>Dogs</title>
-<script>
-fetch('/api/dog')
-.then(function(response) {return response.json();})
-.then(data => {
-    const dogsUl = document.getElementById('dogsUl');
-    data.map((item) => {
-        dogsUl.insertAdjacentHTML('beforeend', `<li>${item.id}</li>`);
-    });
-});
-</script>
+    <title>Dogs</title>
+    <script>
+        const wsProtocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+        const ws = new WebSocket(wsProtocol + "//" + window.location.host + "/ws");
+        ws.onmessage = (event) => {
+            document.getElementById("dogGreetingsCount").innerText = event.data;
+        };
+        function inc() {
+            ws.send("inc");
+        }
+
+        fetch('/api/dog')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(data => {
+                const dogsUl = document.getElementById('dogsUl');
+                data.map((item) => {
+                    dogsUl.insertAdjacentHTML('beforeend', `<li>${item.id}</li>`);
+                });
+            });
+    </script>
 </head>
 <body>
-<h1>Dogs</h1>
-<ul id="dogsUl"></ul>
+<div style="display: flex; align-items: center; gap: 8px;">
+    <p>Dog greetings: <span id="dogGreetingsCount"></span></p>
+    <button onclick="inc()">+1</button>
+</div>
+<div>
+    <p><b>Dogs</b></p>
+    <ul id="dogsUl"></ul>
+</div>
 </body>
 </html>

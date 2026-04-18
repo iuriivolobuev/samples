@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/app")
-public class AppController {
+class AppController {
   @GetMapping("/info")
   public String getInfo() {
       return "app=sample-webapp";

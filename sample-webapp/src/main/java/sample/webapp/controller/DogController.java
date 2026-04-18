@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/dog")
-public class DogController {
+class DogController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private final DogService dogService;
 
