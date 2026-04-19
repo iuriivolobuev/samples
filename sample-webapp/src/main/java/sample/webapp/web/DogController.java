@@ -1,4 +1,4 @@
-package sample.webapp.controller;
+package sample.webapp.web;
 
 import jakarta.validation.Valid;
 import org.slf4j.Logger;

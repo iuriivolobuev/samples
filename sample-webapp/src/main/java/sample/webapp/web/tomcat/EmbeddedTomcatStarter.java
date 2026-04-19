@@ -1,8 +1,8 @@
-package sample.webapp.web;
+package sample.webapp.web.tomcat;
 
 import java.util.Locale;
 
-public class EmbeddedTomcatStarter {
+class EmbeddedTomcatStarter {
     private static final String CONTEXTS = "classpath:/web-context.xml classpath:/dao-context.xml";
 
     public static void main(String[] args) {

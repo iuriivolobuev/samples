@@ -17,9 +17,9 @@
 
   <mvc:resources mapping="/static/**" location="classpath:/static/"/>
 
-  <bean class="sample.webapp.controller.AppController"/>
-  <bean class="sample.webapp.controller.DogController"/>
-  <bean class="sample.webapp.controller.HtmlController"/>
+  <bean class="sample.webapp.web.AppController"/>
+  <bean class="sample.webapp.web.DogController"/>
+  <bean class="sample.webapp.web.HtmlController"/>
 
   <bean class="sample.webapp.service.TransactionalDogService">
     <constructor-arg>
@@ -30,5 +30,5 @@
   <websocket:handlers>
     <websocket:mapping path="/ws" handler="dogWebSocketHandler"/>
   </websocket:handlers>
-  <bean id="dogWebSocketHandler" class="sample.webapp.controller.DogWebSocketHandler"/>
+  <bean id="dogWebSocketHandler" class="sample.webapp.web.DogWebSocketHandler"/>
 </beans>

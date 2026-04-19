@@ -1,4 +1,4 @@
-package sample.webapp.controller;
+package sample.webapp.web;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;

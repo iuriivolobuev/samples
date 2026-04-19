@@ -1,4 +1,4 @@
-package sample.webapp.controller;
+package sample.webapp.web;
 
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -15,13 +15,13 @@ class DogWebSocketHandler extends TextWebSocketHandler {
     private final Set<WebSocketSession> sessions = new CopyOnWriteArraySet<>();
 
     @Override
-    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+    public void afterConnectionEstablished(WebSocketSession session) throws IOException {
         sessions.add(session);
         sendGreetingsCount(session, greetingsCounter.get());
     }
 
     @Override
-    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
         if ("inc".equals(message.getPayload())) {
             int greetingsCount = greetingsCounter.incrementAndGet();
             for (WebSocketSession s : sessions)

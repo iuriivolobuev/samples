@@ -1,4 +1,4 @@
-package sample.webapp.web;
+package sample.webapp.web.tomcat;
 
 import org.apache.catalina.Container;
 import org.apache.catalina.Context;
