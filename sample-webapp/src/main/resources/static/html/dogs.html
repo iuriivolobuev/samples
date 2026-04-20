@@ -3,16 +3,12 @@
 <head>
     <title>Dogs</title>
     <script>
-        const wsProtocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-        const ws = new WebSocket(wsProtocol + "//" + window.location.host + "/ws");
-        ws.onmessage = (event) => {
-            document.getElementById("dogGreetingsCount").innerText = event.data;
-        };
-        function inc() {
-            ws.send("inc");
-        }
+        const httpProtocol = window.location.protocol === "https:" ? "https" : "http";
+        const wsProtocol   = window.location.protocol === "https:" ? "wss" : "ws";
+        const host = window.location.host;
 
-        fetch('/api/dog')
+        const apiDogUrl = httpProtocol + "://" + host + "/api/dog"
+        fetch(apiDogUrl)
             .then(function (response) {
                 return response.json();
             })
@@ -22,6 +18,15 @@
                     dogsUl.insertAdjacentHTML('beforeend', `<li>${item.id}</li>`);
                 });
             });
+
+        const wsUrl = wsProtocol + "://" + host + "/ws";
+        const ws = new WebSocket(wsUrl);
+        ws.onmessage = (event) => {
+            document.getElementById("dogGreetingsCount").innerText = event.data;
+        };
+        function inc() {
+            ws.send("inc");
+        }
     </script>
 </head>
 <body>
