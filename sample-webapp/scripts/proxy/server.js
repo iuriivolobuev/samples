@@ -1,17 +1,16 @@
-//1. npm init -y
-//2. npm install express http-proxy-middleware cors
-//3. node proxy.js
-
 const express = require('express');
 const {createProxyMiddleware} = require('http-proxy-middleware');
-const cors = require('cors');
+const path = require('path');
 
 const app = express();
-app.use(cors());
+
+app.use('/static', express.static(
+    path.join(__dirname, '..', '..', 'src', 'main', 'resources', 'static')
+));
 
 app.use('/', createProxyMiddleware({
     target: 'http://localhost:8080/',
-    changeOrigin: true
+    ws: true
 }));
 
 app.listen(3000, () => {

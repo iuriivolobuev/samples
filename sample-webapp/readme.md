@@ -1,6 +1,6 @@
 # sample-webapp
 
 ## Setup
-- run [postgres-up.sh](scripts/postgres-up.sh) to start postgres
+- run [scripts/postgres-up.sh](scripts/postgres-up.sh) to start postgres
 - run `EmbeddedTomcatStarter#main`
-- use [proxy.js](scripts/proxy.js) for javascript development
+- use [scripts/proxy/up.sh](scripts/proxy/up.sh) for frontend development
