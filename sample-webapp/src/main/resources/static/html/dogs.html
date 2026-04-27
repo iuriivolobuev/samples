@@ -3,12 +3,7 @@
 <head>
     <title>Dogs</title>
     <script>
-        const httpProtocol = window.location.protocol === "https:" ? "https" : "http";
-        const wsProtocol   = window.location.protocol === "https:" ? "wss" : "ws";
-        const host = window.location.host;
-
-        const apiDogUrl = httpProtocol + "://" + host + "/api/dog"
-        fetch(apiDogUrl)
+        fetch('/api/dog')
             .then(function (response) {
                 return response.json();
             })
@@ -19,13 +14,12 @@
                 });
             });
 
-        const wsUrl = wsProtocol + "://" + host + "/ws";
-        const ws = new WebSocket(wsUrl);
+        const ws = new WebSocket('/api/ws/dog');
         ws.onmessage = (event) => {
-            document.getElementById("dogGreetingsCount").innerText = event.data;
+            document.getElementById('dogGreetingsCount').innerText = event.data;
         };
         function inc() {
-            ws.send("inc");
+            ws.send('inc');
         }
     </script>
 </head>

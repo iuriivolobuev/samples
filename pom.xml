@@ -154,7 +154,7 @@
             <release>25</release>
             <encoding>UTF-8</encoding>
             <compilerArgs>
-              <arg>-parameters</arg><!--allows not to specify explicitly path variable name in @PathVariable-->
+              <arg>-parameters</arg><!--allows not to specify explicitly variable name in @PathVariable/@RequestParam-->
             </compilerArgs>
           </configuration>
         </plugin>

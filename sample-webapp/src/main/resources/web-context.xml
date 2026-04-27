@@ -28,7 +28,7 @@
   </bean>
 
   <websocket:handlers>
-    <websocket:mapping path="/ws" handler="dogWebSocketHandler"/>
+    <websocket:mapping path="/api/ws/dog" handler="dogWebSocketHandler"/>
   </websocket:handlers>
   <bean id="dogWebSocketHandler" class="sample.webapp.web.DogWebSocketHandler"/>
 </beans>
